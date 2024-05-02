@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Tarifas Bancárias</title>
+</head>
+<body>
+    <h1>Calculadora de Tarifas Bancárias</h1>
+<form id="feesForm">
+    <label>Valor total transferido via Pix para outras contas por mês: <input type="text" id="pixSentAmount"></label><br>
+    <label>Qual é o valor recebido via Pix por mês? (Via QR Code Pix, maquininha, link e aplicativo) <input type="text" id="pixReceivedAmount"></label><br>
+    <label>Quantos boletos são gerados por mês? <input type="text" id="numberOfBills"></label><br>
+    <label>Quantos links de pagamento ou cobranças são gerados por mês? <input type="text" id="numberOfLinks"></label><br>
+    <label>Quantos extratos são solicitados por mês? <input type="text" id="numberOfStatements"></label><br>
+    <label>Quantas contas são pagas por mês? <input type="text" id="numberOfPayments"></label><br>
+    <label>Quantos atendimentos são solicitados por mês? <input type="text" id="numberOfServices"></label><br>
+    <label>Tem cartão de crédito? <select id="hasCreditCard"><option value="true">Sim</option><option value="false" selected>Não</option></select></label><br>
+    <button type="button" onclick="calculateTotalFees()">Calcular Tarifas</button>
+</form>
+    <div id="results">
+        <p><strong>Total Mensal: </strong><span id="totalMonthly">R$0,00</span></p>
+        <p><strong>Total Anual: </strong><span id="totalAnnual">R$0,00</span></p>
+        <p><strong>Detalhes Mensais:</strong><br><span id="monthlyDetails"></span></p>
+        <p><strong>Detalhes Anuais:</strong><br><span id="annualDetails"></span></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

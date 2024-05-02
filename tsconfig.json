@@ -6,7 +6,7 @@
       "es2022",
       "dom"
     ],
-    "outDir": "./dist",
+    "outDir": "./",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,

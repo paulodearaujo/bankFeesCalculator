@@ -1,3 +1,4 @@
+// Interface defining the structure for banking fee related data
 interface IBankFees {
   pixSentAmount: number;
   pixReceivedAmount: number;
@@ -9,6 +10,7 @@ interface IBankFees {
   hasCreditCard: boolean;
 }
 
+// Constant object holding various fee rates and costs
 const fees = {
   monthlyFee: 163.58,
   maintenanceFee: 73.48,
@@ -22,18 +24,24 @@ const fees = {
   pixReceivePercentage: 0.014
 };
 
+// Utility class for currency formatting
+
 class CurrencyFormatter {
   static formatCurrency(value: number): string {
+    // Formats a numeric value into a currency string (Brazilian Real)
     return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   }
 }
 
+// Class dedicated to fee calculations
 class FeeCalculator {
   static calculateTotal(amount: number, rate: number): number {
+    // Multiplies amount by rate to get total fee
     return amount * rate;
   }
 
   static calculateFees(feeData: IBankFees): { totalMonthly: number, totalAnnual: number } {
+    // Calculate individual fees based on feeData and constants from fees object
     const monthlyDetails = {
       pixTotal: this.calculateTotal(feeData.pixSentAmount, fees.pixSendPercentage) +
         this.calculateTotal(feeData.pixReceivedAmount, fees.pixReceivePercentage),
@@ -47,10 +55,11 @@ class FeeCalculator {
       creditCardMonthlyFee: feeData.hasCreditCard ? fees.creditCardAnnualFee : 0
     };
 
+    // Sum all monthly fees to get total monthly and calculate annual by multiplying by 12
     const totalMonthly = Object.values(monthlyDetails).reduce((acc, value) => acc + value, 0);
     const totalAnnual = totalMonthly * 12;
 
-    // Logging each value in the monthlyDetails
+    // Output logs for debugging (REMOVE IT)
     console.log("Monthly Fee Breakdown:", monthlyDetails);
     console.log("Total Monthly Fee:", totalMonthly);
     console.log("Total Annual Fee:", totalAnnual);
@@ -59,11 +68,13 @@ class FeeCalculator {
   }
 }
 
+// Event handler for enforcing numeric input only
 function enforceNumericInput(event: Event): void {
   const inputElement = event.target as HTMLInputElement;
   inputElement.value = inputElement.value.replace(/[^0-9]/g, "");
 }
 
+// Event handler to format inputs as currency
 function formatCurrencyInput(event: Event): void {
   enforceNumericInput(event);
   const inputElement = event.target as HTMLInputElement;
@@ -71,6 +82,7 @@ function formatCurrencyInput(event: Event): void {
   inputElement.value = num ? CurrencyFormatter.formatCurrency(num) : "";
 }
 
+// Initializes event listeners on specified input fields
 function initializeCurrencyInputs(): void {
   const ids = ["pixSentAmount", "pixReceivedAmount", "numberOfBills", "numberOfLinks", "numberOfStatements", "numberOfPayments", "numberOfServices"];
   ids.forEach(id => {
@@ -79,12 +91,14 @@ function initializeCurrencyInputs(): void {
   });
 }
 
+// Attach event listener to ensure initialization is done after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initializeCurrencyInputs);
 
 function parseCurrencyInput(value: string): number {
   return parseFloat(value.replace(/\D/g, "")) / 100 || 0;
 }
 
+// Global function to calculate and display total fees
 (window as any).calculateTotalFees = () => {
   const feeData: IBankFees = {
     pixSentAmount: parseCurrencyInput((document.getElementById("pixSentAmount") as HTMLInputElement).value),
@@ -97,10 +111,12 @@ function parseCurrencyInput(value: string): number {
     hasCreditCard: (document.getElementById("hasCreditCard") as HTMLSelectElement).value === "true"
   };
 
+  // Elements for displaying results and errors
   const errorOutputEl = document.getElementById("errorOutput") as HTMLElement;
   const totalMonthlyEl = document.getElementById("totalMonthly") as HTMLElement;
   const totalAnnualEl = document.getElementById("totalAnnual") as HTMLElement;
 
+  // Check if all values are default and display error if true
   if (Object.values(feeData).every(value => typeof value === "number" ? value === 0 : !value)) {
     errorOutputEl.textContent = "Por favor, insira ao menos um valor para calcular.";
     totalMonthlyEl.textContent = "R$0,00";

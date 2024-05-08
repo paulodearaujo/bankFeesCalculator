@@ -79,8 +79,8 @@ window.calculateTotalFees = () => {
     const totalAnnualEl = document.getElementById("totalAnnual");
     if (Object.values(feeData).every(value => typeof value === "number" ? value === 0 : !value)) {
         errorOutputEl.textContent = "Por favor, insira ao menos um valor para calcular.";
-        totalMonthlyEl.textContent = "";
-        totalAnnualEl.textContent = "";
+        totalMonthlyEl.textContent = "R$0,00";
+        totalAnnualEl.textContent = "R$0,00";
     }
     else {
         errorOutputEl.textContent = "";

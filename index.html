@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora de Tarifas Bancárias</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <h1>Calculadora de Tarifas Bancárias</h1>
-<form id="feesForm">
-    <label>Valor total transferido via Pix para outras contas por mês: <input id="pixSentAmount" placeholder="R$" type="text"></label><br>
-    <label>Qual é o valor recebido via Pix por mês? (Via QR Code Pix, maquininha, link e aplicativo) <input id="pixReceivedAmount" placeholder="R$" type="text"></label><br>
-    <label>Quantos boletos são gerados por mês? <input id="numberOfBills" type="text"></label><br>
-    <label>Quantos links de pagamento ou cobranças são gerados por mês? <input id="numberOfLinks" type="text"></label><br>
-    <label>Quantos extratos são solicitados por mês? <input id="numberOfStatements" type="text"></label><br>
-    <label>Quantas contas são pagas por mês? <input id="numberOfPayments" type="text"></label><br>
-    <label>Quantos atendimentos são solicitados por mês? <input id="numberOfServices" type="text"></label><br>
-    <label>Tem cartão de crédito? <select id="hasCreditCard"><option value="true">Sim</option><option selected value="false">Não</option></select></label><br>
-    <button onclick="calculateTotalFees()" type="button">Calcular Tarifas</button>
-</form>
-    <div id="results">
-        <p><strong>Total Mensal: </strong><span id="totalMonthly">R$0,00</span></p>
-        <p><strong>Total Anual: </strong><span id="totalAnnual">R$0,00</span></p>
+    <div class="container">
+        <form id="feesForm">
+            <label for="pixSentAmount">Valor total transferido via Pix para outras contas por mês: <input id="pixSentAmount" placeholder="R$" type="text"></label><br>
+            <label for="pixReceivedAmount">Qual é o valor recebido via Pix por mês? (Via QR Code Pix, maquininha, link e aplicativo) <input id="pixReceivedAmount" placeholder="R$" type="text"></label><br>
+            <label for="numberOfBills">Quantos boletos são gerados por mês? <input id="numberOfBills" type="text"></label><br>
+            <label for="numberOfLinks">Quantos links de pagamento ou cobranças são gerados por mês? <input id="numberOfLinks" type="text"></label><br>
+            <label for="numberOfStatements">Quantos extratos são solicitados por mês? <input id="numberOfStatements" type="text"></label><br>
+            <label for="numberOfPayments">Quantas contas são pagas por mês? <input id="numberOfPayments" type="text"></label><br>
+            <label for="numberOfServices">Quantos atendimentos são solicitados por mês? <input id="numberOfServices" type="text"></label><br>
+            <label for="hasCreditCard">Tem cartão de crédito? <select id="hasCreditCard"><option value="true">Sim</option><option selected value="false">Não</option></select></label><br>
+            <button type="button" onclick="calculateTotalFees()">Calcular Tarifas</button>
+        </form>
+        <div id="results">
+            <p>Com a InfinitePay você economiza*:</p>
+            <p><span id="totalMonthly">R$0,00</span> por mês</p>
+            <p><span id="totalAnnual">R$0,00</span> por ano</p>
+            <p>*Estimativa de gastos com base nas taxas cobradas pelos 3 maiores bancos privados do país.</p>
+        </div>
     </div>
     <div id="errorOutput" style="color: red; margin-top: 10px;"></div>
-    <script src="script.js"></script>
 </body>
 </html>

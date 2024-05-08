@@ -3,4 +3,6 @@
 out
 gen
 src
-tsconfig.json
+!/node_modules/
+!/tsconfig.json
+!/src/

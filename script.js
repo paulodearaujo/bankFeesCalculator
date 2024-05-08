@@ -1,7 +1,7 @@
 "use strict";
 // Constant object holding various fee rates and costs
 const fees = {
-    monthlyFee: 163.58,
+    monthlyFee: 72,
     maintenanceFee: 73.48,
     billGenerationFee: 3.50,
     paymentLinkFee: 6.63,
